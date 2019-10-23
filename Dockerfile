@@ -8,6 +8,8 @@ RUN apt-get update && apt-get -y install \
   gcc \
   git \
   make \
+  nodejs \
+  npm \
   rpm \
   ruby \
   ruby-dev \
