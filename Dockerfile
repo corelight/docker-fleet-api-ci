@@ -21,6 +21,9 @@ RUN npm install -g create-react-app
 # npm-run-all ?
 
 RUN	go get -u github.com/GeertJohan/go.rice/rice && \
-    go get -u github.com/golang/dep/cmd/dep
+    go get -u github.com/golang/dep/cmd/dep && \
+    go get -u github.com/mgechev/revive
 
 RUN gem install --no-ri --no-rdoc fpm
+
+ENV PATH=/root/go/bin:$PATH
