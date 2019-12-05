@@ -18,6 +18,7 @@ RUN apt-get update && apt-get -y install \
   && rm -rf /var/lib/apt/lists/*
 
 RUN npm install -g create-react-app
+RUN npm install -g newman
 # npm-run-all ?
 
 RUN	go get -u github.com/GeertJohan/go.rice/rice && \
