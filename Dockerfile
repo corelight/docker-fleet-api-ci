@@ -22,7 +22,8 @@ RUN npm install -g create-react-app
 
 RUN	go get -u github.com/GeertJohan/go.rice/rice && \
     go get -u github.com/golang/dep/cmd/dep && \
-    go get -u github.com/mgechev/revive
+    go get -u github.com/mgechev/revive \
+    go get -u github.com/swaggo/swag/cmd/swag
 
 RUN gem install --no-ri --no-rdoc fpm
 
