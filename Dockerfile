@@ -3,29 +3,27 @@ LABEL maintainer="Corelight AWS Team <aws@corelight.com>"
 LABEL description="Ubuntu-based builder including Go, NPM and Ruby tool FPM"
 
 RUN apt-get update && apt-get -y install \
-  build-essential \
-  debhelper \
-  gcc \
-  git \
-  make \
-  nodejs \
-  npm \
-  rpm \
-  ruby \
-  ruby-dev \
-  rubygems \
-  sudo \
-  wget \
+  build-essential=12.4ubuntu1 \
+  debhelper=11.1.6ubuntu2 \
+  gcc=4:7.4.0-1ubuntu2.3 \
+  git=1:2.17.1-1ubuntu0.5 \
+  make=4.1-9.1ubuntu1 \
+  rpm=4.14.1+dfsg1-2 \
+  ruby=1:2.5.1 \
+  ruby-dev=1:2.5.1 \
+  sudo=1.8.21p2-3ubuntu1.1 \
+  wget=1.19.4-1ubuntu2.2 \
   && rm -rf /var/lib/apt/lists/*
 
-RUN npm install -g create-react-app
-RUN npm install -g newman
+RUN . /root/.nvm/nvm.sh && \
+    npm install -g create-react-app@3.3.0 && \
+    npm install -g newman@4.5.7
 # npm-run-all ?
 
-RUN	go get -u github.com/GeertJohan/go.rice/rice && \
-    go get -u github.com/golang/dep/cmd/dep && \
-    go get -u github.com/mgechev/revive && \
-    go get -u github.com/swaggo/swag/cmd/swag
+RUN	GO111MODULE=on go get -u github.com/GeertJohan/go.rice/rice@v1.0.0 && \
+    GO111MODULE=on go get -u github.com/mgechev/revive@v1.0.0 && \
+    GO111MODULE=on go get -u github.com/swaggo/swag/cmd/swag@v1.6.3 && \
+    rm -rf /root/go/pkg/*
 
 RUN mkdir -p /tmp/swaggo && \
     cd /tmp/swaggo && \
@@ -33,6 +31,6 @@ RUN mkdir -p /tmp/swaggo && \
     tar xzvf swag_1.6.3_Linux_x86_64.tar.gz && \
     mv swag /root/go/bin/swag-prebuild
 
-RUN gem install --no-ri --no-rdoc fpm
+RUN gem install -N fpm -v 1.11.0
 
 ENV PATH=/root/go/bin:$PATH
