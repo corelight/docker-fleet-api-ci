@@ -31,6 +31,11 @@ RUN mkdir -p /tmp/swaggo && \
     tar xzvf swag_1.6.3_Linux_x86_64.tar.gz && \
     mv swag /root/go/bin/swag-prebuild
 
+# Install the "swagger" command which is actually "go-swagger" on the web's
+# and the generated we used to produce model structures from swagger spec
+RUN curl -o /usr/local/bin/swagger -L "https://github.com/go-swagger/go-swagger/releases/download/v0.22.0/swagger_linux_amd64" && \
+    chmod +x /usr/local/bin/swagger
+
 RUN gem install -N fpm -v 1.11.0
 
 ENV PATH=/root/go/bin:$PATH
