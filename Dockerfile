@@ -33,7 +33,7 @@ RUN mkdir -p /tmp/swaggo && \
 
 # Install the "swagger" command which is actually "go-swagger" on the web's
 # and the generated we used to produce model structures from swagger spec
-RUN curl -o /usr/local/bin/swagger -L "https://github.com/go-swagger/go-swagger/releases/download/v0.21.0/swagger_linux_amd64" && \
+RUN curl -o /usr/local/bin/swagger -L "https://github.com/go-swagger/go-swagger/releases/download/v0.22.0/swagger_linux_amd64" && \
     chmod +x /usr/local/bin/swagger
 
 RUN gem install -N fpm -v 1.11.0
