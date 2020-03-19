@@ -11,7 +11,7 @@ RUN apt-get update && apt-get -y install \
   rpm=4.14.1+dfsg1-2 \
   ruby=1:2.5.1 \
   ruby-dev=1:2.5.1 \
-  sudo=1.8.21p2-3ubuntu1.1 \
+  sudo=1.8.21p2-3ubuntu1.2 \
   wget=1.19.4-1ubuntu2.2 \
   && rm -rf /var/lib/apt/lists/*
 
