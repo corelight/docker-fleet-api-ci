@@ -1,4 +1,4 @@
-FROM corelight/ubuntu-go-npm:v0.5
+FROM corelight/ubuntu-go-npm:v0.6
 LABEL maintainer="Corelight AWS Team <aws@corelight.com>"
 LABEL description="Ubuntu-based builder including Go, NPM and Ruby tool FPM"
 
