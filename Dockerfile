@@ -16,7 +16,8 @@ RUN apt-get update && apt-get -y install \
   wget=1.19.4-1ubuntu2.2 \
   && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --upgrade python-gitlab
+RUN pip install --upgrade 'python-gitlab==1.15.0'
+
 
 RUN . /root/.nvm/nvm.sh && \
     npm install -g create-react-app@3.3.0 && \
