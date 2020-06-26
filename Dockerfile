@@ -18,7 +18,6 @@ RUN apt-get update && apt-get -y install \
 
 RUN pip install --upgrade 'python-gitlab==1.15.0'
 
-
 RUN . /root/.nvm/nvm.sh && \
     npm install -g create-react-app@3.3.0 && \
     npm install -g newman@4.5.7
