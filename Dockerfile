@@ -28,6 +28,8 @@ RUN	GO111MODULE=on go get -u github.com/GeertJohan/go.rice/rice@v1.0.0 && \
     GO111MODULE=on go get -u github.com/swaggo/swag/cmd/swag@v1.6.3 && \
     rm -rf /root/go/pkg/*
 
+RUN	go get github.com/t-yuki/gocover-cobertura
+
 RUN mkdir -p /tmp/swaggo && \
     cd /tmp/swaggo && \
     wget https://github.com/swaggo/swag/releases/download/v1.6.3/swag_1.6.3_Linux_x86_64.tar.gz && \
