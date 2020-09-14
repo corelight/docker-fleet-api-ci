@@ -6,14 +6,14 @@ RUN apt-get update && apt-get -y install \
   build-essential=12.4ubuntu1 \
   debhelper=11.1.6ubuntu2 \
   gcc=4:7.4.0-1ubuntu2.3 \
-  git=1:2.17.1-1ubuntu0.5 \
-  make=4.1-9.1ubuntu1 \
+  git \
+  make \
   python-pip \
   rpm=4.14.1+dfsg1-2 \
   ruby=1:2.5.1 \
   ruby-dev \
   sudo \
-  wget=1.19.4-1ubuntu2.2 \
+  wget \
   && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --upgrade 'python-gitlab==1.15.0'
