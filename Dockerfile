@@ -43,4 +43,21 @@ RUN curl -o /usr/local/bin/swagger -L "https://github.com/go-swagger/go-swagger/
 
 RUN gem install -N fpm -v 1.11.0
 
+# Install postgresql and timescaledb
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list && \
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - && \
+    apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get -y install postgresql-12
+
+RUN apt-get update && apt-get install -y software-properties-common && \
+    add-apt-repository ppa:timescale/timescaledb-ppa && \
+    apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get -y install timescaledb-postgresql-12
+
+# Allow postgres db connections 
+RUN sed -i '/local[ ]*all[ ]*all[ ]*peer/a host postgres postgres 0.0.0.0/0 trust' /etc/postgresql/12/main/pg_hba.conf
+
+ENTRYPOINT service postgresql start && /bin/bash
+# Expose the PostgreSQL port
+EXPOSE 5432
 ENV PATH=/root/go/bin:$PATH
