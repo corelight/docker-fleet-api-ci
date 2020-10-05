@@ -23,12 +23,15 @@ RUN . /root/.nvm/nvm.sh && \
     npm install -g newman@4.5.7
 # npm-run-all ?
 
-RUN	GO111MODULE=on go get -u github.com/GeertJohan/go.rice/rice@v1.0.0 && \
+# At last check, gocover-cobertura, go-licenses and stringer are not versioned
+RUN GO111MODULE=on go get -u github.com/GeertJohan/go.rice/rice@v1.0.0 && \
     GO111MODULE=on go get -u github.com/mgechev/revive@v1.0.0 && \
     GO111MODULE=on go get -u github.com/swaggo/swag/cmd/swag@v1.6.3 && \
+    GO111MODULE=on go get -u github.com/alvaroloes/enumer@v1.1.2 && \
+    go get -u github.com/t-yuki/gocover-cobertura && \
+    go get -u github.com/google/go-licenses && \
+    go get -u golang.org/x/tools/cmd/stringer && \
     rm -rf /root/go/pkg/*
-
-RUN	go get github.com/t-yuki/gocover-cobertura
 
 RUN mkdir -p /tmp/swaggo && \
     cd /tmp/swaggo && \
