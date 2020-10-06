@@ -54,4 +54,6 @@ RUN apt-get update && apt-get install -y software-properties-common && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install timescaledb-postgresql-12
 
+CMD service postgresql start
+
 ENV PATH=/root/go/bin:$PATH
