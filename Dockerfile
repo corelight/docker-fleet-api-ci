@@ -56,4 +56,7 @@ RUN apt-get update && apt-get install -y software-properties-common && \
 
 CMD service postgresql start
 
+# Expose the PostgreSQL port
+EXPOSE 5432
+
 ENV PATH=/root/go/bin:$PATH
