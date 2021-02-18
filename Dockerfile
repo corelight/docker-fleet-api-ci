@@ -8,6 +8,7 @@ RUN apt-get update && apt-get -y install \
   gcc=4:7.4.0-1ubuntu2.3 \
   git \
   make \
+  python3 \
   python-pip \
   rpm=4.14.1+dfsg1-2 \
   ruby=1:2.5.1 \
@@ -24,7 +25,7 @@ RUN . /root/.nvm/nvm.sh && \
 # npm-run-all ?
 
 # At last check, gocover-cobertura, go-licenses and stringer are not versioned
-RUN GO111MODULE=on go get -u github.com/GeertJohan/go.rice/rice@v1.0.0 && \
+RUN GO111MODULE=on go get -u github.com/GeertJohan/go.rice/rice@v1.0.2 && \
     GO111MODULE=on go get -u github.com/mgechev/revive@v1.0.0 && \
     GO111MODULE=on go get -u github.com/swaggo/swag/cmd/swag@v1.6.3 && \
     GO111MODULE=on go get -u github.com/alvaroloes/enumer@v1.1.2 && \
