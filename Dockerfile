@@ -1,23 +1,28 @@
-FROM corelight/ubuntu-go-npm:v0.7
+FROM corelight/ubuntu-go-npm:v0.9
 LABEL maintainer="Corelight AWS Team <aws@corelight.com>"
 LABEL description="Ubuntu-based builder including Go, NPM and Ruby tool FPM"
 
 RUN apt-get update && apt-get -y install \
-  build-essential=12.4ubuntu1 \
-  debhelper=11.1.6ubuntu2 \
-  gcc=4:7.4.0-1ubuntu2.3 \
+  build-essential \
+  debhelper \
+  gcc \
   git \
   make \
   python3 \
-  python-pip \
-  rpm=4.14.1+dfsg1-2 \
-  ruby=1:2.5.1 \
+  python3-pip \
+  rpm \
+  ruby \
   ruby-dev \
   sudo \
   wget \
   && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --upgrade 'python-gitlab==1.15.0'
+# Installs PIP for python 2,  We need python 2 for pulling gitlab artifacts
+# and Ubuntu as of 20.04 nolonger comes with pip 2
+RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py && \
+    python2 get-pip.py && \
+    /usr/local/bin/pip install --upgrade 'python-gitlab==1.15.0'; \
+    rm get-pip.py
 
 RUN . /root/.nvm/nvm.sh && \
     npm install -g create-react-app@3.3.0 && \
@@ -32,7 +37,10 @@ RUN GO111MODULE=on go get -u github.com/GeertJohan/go.rice/rice@v1.0.2 && \
     go get -u github.com/t-yuki/gocover-cobertura && \
     go get -u github.com/google/go-licenses && \
     go get -u golang.org/x/tools/cmd/stringer && \
-    rm -rf /root/go/pkg/*
+    mv /root/go/pkg/mod/github.com/google/licenseclassifier* . && \
+    rm -rf /root/go/pkg/* && \
+    mkdir -p /root/go/pkg/mod/github.com/google/ && \
+    mv licenseclassifier* /root/go/pkg/mod/github.com/google/
 
 RUN mkdir -p /tmp/swaggo && \
     cd /tmp/swaggo && \
